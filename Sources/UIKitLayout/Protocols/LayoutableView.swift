@@ -7,36 +7,30 @@
 import UIKit
 
 public protocol LayoutableView: UIView {
-    typealias Margins = Layout.Margins
-    
-    typealias Alignment = Layout.Alignment
-    
-    typealias Dimensions = Layout.Dimensions
-    
     func installSubview(_ view: UIView,
-                        withMargins layoutMargins: Margins,
+                        withMargins layoutMargins: Layout.Margins,
                         priority: UILayoutPriority)
     
     @discardableResult
-    func activateConstraints(withMargis layoutMargins: Margins,
+    func activateConstraints(withMargis layoutMargins: Layout.Margins,
                                       to otherObject: LayoutAnchorable,
                                       priority: UILayoutPriority) -> [NSLayoutConstraint]
     
     
     @discardableResult
-    func activateConstraints(withAlignment layoutAlignment: Alignment,
+    func activateConstraints(withAlignment layoutAlignment: Layout.Alignment,
                              to otherView: Self,
                              priority: UILayoutPriority) -> [NSLayoutConstraint]
     
     @discardableResult
-    func setDimensions(_ layoutDimensions: Dimensions,
+    func setDimensions(_ layoutDimensions: Layout.Dimensions,
                                   priority: UILayoutPriority) -> [NSLayoutConstraint]
 }
 
 public extension LayoutableView {
     /// Adds a view to the end of the receiver’s list of subviews and binds it with constraints that satisfy the given layout margins.
     func installSubview(_ view: UIView,
-                        withMargins layoutMargins: Margins,
+                        withMargins layoutMargins: Layout.Margins,
                         priority: UILayoutPriority) {
         
         addSubview(view)
@@ -45,7 +39,7 @@ public extension LayoutableView {
     }
 
     @discardableResult
-    func activateConstraints(withMargis layoutMargins: Margins,
+    func activateConstraints(withMargis layoutMargins: Layout.Margins,
                              to otherObject: LayoutAnchorable,
                              priority: UILayoutPriority) -> [NSLayoutConstraint] {
         
@@ -78,7 +72,7 @@ public extension LayoutableView {
     
     
     @discardableResult
-    func activateConstraints(withAlignment layoutAlignment: Alignment,
+    func activateConstraints(withAlignment layoutAlignment: Layout.Alignment,
                              to otherView: Self,
                              priority: UILayoutPriority) -> [NSLayoutConstraint] {
         
@@ -91,7 +85,7 @@ public extension LayoutableView {
     
 
     @discardableResult
-    func setDimensions(_ layoutDimensions: Dimensions,
+    func setDimensions(_ layoutDimensions: Layout.Dimensions,
                        priority: UILayoutPriority) -> [NSLayoutConstraint] {
         
         var constraints = [NSLayoutConstraint]()
