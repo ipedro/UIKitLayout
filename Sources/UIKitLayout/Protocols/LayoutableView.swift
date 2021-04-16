@@ -7,13 +7,11 @@
 import UIKit
 
 public protocol LayoutableView: UIView {
-    associatedtype Spacing: RawRepresentable
+    typealias Margins = Layout.Margins
     
-    typealias Margins = Layout.Margins<Spacing>
+    typealias Alignment = Layout.Alignment
     
-    typealias Alignment = Layout.Alignment<Spacing>
-    
-    typealias Dimensions = Layout.Dimensions<Spacing>
+    typealias Dimensions = Layout.Dimensions
     
     func installSubview(_ view: UIView,
                         withMargins layoutMargins: Margins,
@@ -35,7 +33,7 @@ public protocol LayoutableView: UIView {
                                   priority: UILayoutPriority) -> [NSLayoutConstraint]
 }
 
-public extension LayoutableView where Spacing.RawValue == CGFloat {
+public extension LayoutableView {
     /// Adds a view to the end of the receiver’s list of subviews and binds it with constraints that satisfy the given layout margins.
     func installSubview(_ view: UIView,
                         withMargins layoutMargins: Margins,

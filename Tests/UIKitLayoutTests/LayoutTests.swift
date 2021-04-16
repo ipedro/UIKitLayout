@@ -24,16 +24,10 @@ final class UIKitLayoutTests: XCTestCase {
     }
     
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        //XCTAssertEqual(Layout().text, "Hello, World!")
-        
-        
         let otherView = LayoutableMockView()
         
         sut.addSubview(otherView)
-        otherView.activateConstraints(withMargis: .init(.large), to: sut, priority: .defaultLow)
+        otherView.activateConstraints(withMargis: .init(MockSpacing.large), to: sut, priority: .defaultLow)
         
         XCTAssertEqual(sut.constraints.count, 4)
         

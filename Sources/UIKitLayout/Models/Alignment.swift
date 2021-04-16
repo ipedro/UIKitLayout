@@ -7,17 +7,32 @@
 import UIKit
 
 public extension Layout {
-    enum Alignment<Spacing: RawRepresentable> {
-        case horizontal(Spacing? = nil)
-        case vertical(Spacing? = nil)
-        case middle(Spacing? = nil)
+    enum Alignment {
+        case horizontal(CGFloat = .zero)
+        case vertical(CGFloat = .zero)
+        case middle(CGFloat = .zero)
+        
+        public static func horizontal<Spacing: RawRepresentable>(_ spacing: Spacing) -> Self where Spacing.RawValue == CGFloat {
+            .horizontal(spacing.rawValue)
+        }
+        
+        public static func vertical<Spacing: RawRepresentable>(_ spacing: Spacing) -> Self where Spacing.RawValue == CGFloat {
+            .vertical(spacing.rawValue)
+        }
+        
+        public static func middle<Spacing: RawRepresentable>(_ spacing: Spacing) -> Self where Spacing.RawValue == CGFloat {
+            .middle(spacing.rawValue)
+        }
+        
     }
 }
 
-public extension Layout.Alignment where Spacing.RawValue == CGFloat {
-    func constraint(between anchor: LayoutAnchorable,
-                    and otherAnchor: LayoutAnchorable,
-                    priority: UILayoutPriority) -> [NSLayoutConstraint] {
+public extension Layout.Alignment {
+    func constraint(
+        between anchor: LayoutAnchorable,
+        and otherAnchor: LayoutAnchorable,
+        priority: UILayoutPriority
+    ) -> [NSLayoutConstraint] {
         
         var constraints = [NSLayoutConstraint]()
         
@@ -25,7 +40,7 @@ public extension Layout.Alignment where Spacing.RawValue == CGFloat {
         case let .horizontal(spacing),
              let .middle(spacing):
             constraints.append(
-                anchor.centerXAnchor.constraint(equalTo: otherAnchor.centerXAnchor, constant: spacing?.rawValue ?? .zero)
+                anchor.centerXAnchor.constraint(equalTo: otherAnchor.centerXAnchor, constant: spacing)
             )
             
         case .vertical:
@@ -36,7 +51,7 @@ public extension Layout.Alignment where Spacing.RawValue == CGFloat {
         case let .vertical(spacing),
              let .middle(spacing):
             constraints.append(
-                anchor.centerYAnchor.constraint(equalTo: otherAnchor.centerYAnchor, constant: spacing?.rawValue ?? .zero)
+                anchor.centerYAnchor.constraint(equalTo: otherAnchor.centerYAnchor, constant: spacing)
             )
             
         case .horizontal:

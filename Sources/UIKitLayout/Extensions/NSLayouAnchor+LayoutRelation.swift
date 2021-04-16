@@ -8,11 +8,11 @@ import UIKit
 
 public extension NSLayoutXAxisAnchor {
     @discardableResult
-    func activateConstraint<Spacing: RawRepresentable>(
-        _ relation: Layout.Relation<Spacing>,
+    func activateConstraint(
+        _ relation: Layout.Relation = .equalTo(.zero),
         with otherAnchor: NSLayoutXAxisAnchor,
         priority: UILayoutPriority
-    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+    ) -> NSLayoutConstraint {
         
         let constraint = relation.constraint(between: self, and: otherAnchor)
         
@@ -21,27 +21,15 @@ public extension NSLayoutXAxisAnchor {
         return constraint
     }
     
-    @discardableResult
-    func activateConstraint<Spacing: RawRepresentable>(
-        to otherAnchor: NSLayoutXAxisAnchor,
-        priority: UILayoutPriority
-    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
-        
-        let constraint = self.constraint(equalTo: otherAnchor)
-        
-        constraint.activate(with: priority)
-
-        return constraint
-    }
 }
 
 public extension NSLayoutYAxisAnchor {
     @discardableResult
-    func activateConstraint<Spacing: RawRepresentable>(
-        _ relation: Layout.Relation<Spacing>,
+    func activateConstraint(
+        _ relation: Layout.Relation = .equalTo(.zero),
         with otherAnchor: NSLayoutYAxisAnchor,
         priority: UILayoutPriority
-    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+    ) -> NSLayoutConstraint {
         
         let constraint = relation.constraint(between: self, and: otherAnchor)
         
@@ -51,10 +39,10 @@ public extension NSLayoutYAxisAnchor {
     }
     
     @discardableResult
-    func activateConstraint<Spacing: RawRepresentable>(
+    func activateConstraint(
         to otherAnchor: NSLayoutYAxisAnchor,
         priority: UILayoutPriority
-    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+    ) -> NSLayoutConstraint {
         
         let constraint = self.constraint(equalTo: otherAnchor)
         
@@ -66,11 +54,11 @@ public extension NSLayoutYAxisAnchor {
 
 public extension NSLayoutDimension {
     @discardableResult
-    func activateConstraint<Spacing: RawRepresentable>(
-        _ relation: Layout.Relation<Spacing>,
+    func activateConstraint(
+        _ relation: Layout.Relation,
         with otherDimension: NSLayoutDimension,
         priority: UILayoutPriority
-    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+    ) -> NSLayoutConstraint {
         
         let constraint = relation.constraint(between: self, and: otherDimension)
         
@@ -80,10 +68,10 @@ public extension NSLayoutDimension {
     }
 
     @discardableResult
-    func activateConstraint<Spacing: RawRepresentable>(
-        _ relation: Layout.Relation<Spacing>,
+    func activateConstraint(
+        _ relation: Layout.Relation,
         priority: UILayoutPriority
-    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+    ) -> NSLayoutConstraint {
         
         let constraint = relation.constraint(with: self)
         
