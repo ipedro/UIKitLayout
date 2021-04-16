@@ -1,7 +1,7 @@
 import XCTest
 
-import LayoutTests
+import UIKitLayoutTests
 
 var tests = [XCTestCaseEntry]()
-tests += LayoutTests.allTests()
+tests += UIKitLayoutTests.allTests()
 XCTMain(tests)
