@@ -20,6 +20,19 @@ public extension NSLayoutXAxisAnchor {
 
         return constraint
     }
+    
+    @discardableResult
+    func activateConstraint<Spacing: RawRepresentable>(
+        to otherAnchor: NSLayoutXAxisAnchor,
+        priority: UILayoutPriority
+    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+        
+        let constraint = self.constraint(equalTo: otherAnchor)
+        
+        constraint.activate(with: priority)
+
+        return constraint
+    }
 }
 
 public extension NSLayoutYAxisAnchor {
@@ -31,6 +44,19 @@ public extension NSLayoutYAxisAnchor {
     ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
         
         let constraint = relation.constraint(between: self, and: otherAnchor)
+        
+        constraint.activate(with: priority)
+
+        return constraint
+    }
+    
+    @discardableResult
+    func activateConstraint<Spacing: RawRepresentable>(
+        to otherAnchor: NSLayoutYAxisAnchor,
+        priority: UILayoutPriority
+    ) -> NSLayoutConstraint where Spacing.RawValue == CGFloat {
+        
+        let constraint = self.constraint(equalTo: otherAnchor)
         
         constraint.activate(with: priority)
 
